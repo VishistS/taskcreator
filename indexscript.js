@@ -8,6 +8,7 @@ const RestoreButton = document.getElementById("RestoreButton");
 const WebHead = document.getElementById("WebHead");
 
 let ActiveTasks = [];
+let DarkMode = false;
 
 function Task(taskn, taskd) {
     this.taskname = taskn;
@@ -40,12 +41,21 @@ ClearButton.addEventListener('click', function(){
 });
 
 ThemeButton.addEventListener('click', function(){
-    document.body.style.backgroundColor = "#121212";
-    WebHead.style.color = "white";
-    for (let i = 0; i < ActiveTasks.length; i++) {
-        let tempTask = ActiveTasks[i];
-        tempTask.style.backgroundColor = "grey";
-        tempTask.style.color = "white";
+    if (DarkMode === false) {
+        DarkMode = true;
+        document.body.style.backgroundColor = "#121212";
+        WebHead.style.color = "white";
+        // will need to reimplement adjustment of theme for individual list items later on
+        // use loop ^^
+        ThemeButton.value = "Light Mode";
+    }
+    else if (DarkMode === true) {
+        DarkMode = false;
+        document.body.style.backgroundColor = "antiquewhite";
+        // will need to reimplement adjustment of theme for individual list items later on
+        // use loop ^^
+        WebHead.style.color = "black";
+        ThemeButton.value = "Dark Mode";
     }
 });
 

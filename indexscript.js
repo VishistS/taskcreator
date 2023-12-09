@@ -4,9 +4,16 @@ const TaskName = document.getElementById("TaskName");
 const TaskDesc = document.getElementById("TaskDesc");
 const ClearButton = document.getElementById("ClearButton");
 const ThemeButton = document.getElementById("ThemeButton");
+const RestoreButton = document.getElementById("RestoreButton");
 const WebHead = document.getElementById("WebHead");
 
 let ActiveTasks = [];
+
+function Task(taskn, taskd) {
+    this.taskname = taskn;
+    this.taskdesc = taskd;
+}
+
 InputForm.addEventListener('submit', function(){
     event.preventDefault();
     console.log("We're being called");
@@ -15,11 +22,11 @@ InputForm.addEventListener('submit', function(){
    }
     else {
         let newTaskItem = document.createElement('li');
-        let newTaskName = TaskName.value;
-        let newTaskDesc = TaskDesc.value;
-        newTaskItem.innerHTML = "<b>" + newTaskName + "</b><br><i>" + newTaskDesc + "</i>";
+        let taskObj = new Task(TaskName.value, TaskDesc.value)
+        newTaskItem.innerHTML = "<b>" + taskObj.taskname + "</b><br><i>" + taskObj.taskdesc + "</i>";
         TaskList.append(newTaskItem);
-        ActiveTasks.push(newTaskItem);
+        ActiveTasks.push(taskObj);
+        localStorage.setItem("StoreArray", JSON.stringify(ActiveTasks));
         console.log("Pushed");
     }
 });
@@ -28,7 +35,8 @@ ClearButton.addEventListener('click', function(){
     while (TaskList.firstChild){
         TaskList.removeChild(TaskList.firstChild);
     }
-    ActiveTasks.removeAll();
+    ActiveTasks.length = 0;
+    localStorage.setItem("StoreArray", JSON.stringify(ActiveTasks));
 });
 
 ThemeButton.addEventListener('click', function(){
@@ -38,9 +46,23 @@ ThemeButton.addEventListener('click', function(){
         let tempTask = ActiveTasks[i];
         tempTask.style.backgroundColor = "grey";
         tempTask.style.color = "white";
-        console.log("Morgan");
     }
-    console.log("Your wish.")
+});
+
+RestoreButton.addEventListener('click', function(){
+    let listitems = JSON.parse(localStorage.getItem("StoreArray"));
+    console.log(listitems);
+    while (TaskList.firstChild){
+        TaskList.removeChild(TaskList.firstChild);
+    }
+    for (let i = 0; i < listitems.length; i++) {
+        let tempName = listitems[i].taskname;
+        let tempDesc = listitems[i].taskdesc;
+        let newTaskItem = document.createElement('li');
+
+        newTaskItem.innerHTML = "<b>" + tempName + "</b><br><i>" + tempDesc + "</i>";
+        TaskList.append(newTaskItem);
+    }
 });
 
 // add localstorage functionality

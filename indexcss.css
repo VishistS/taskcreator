@@ -28,7 +28,7 @@ li:hover {
   transform: scale(1.05); /* Adjust as needed */
 }
 
-#AddButton, #ClearButton, #ThemeButton {
+#AddButton, #ClearButton, #ThemeButton, #RestoreButton {
     background-color: white; /* Green color, adjust as needed */
     color: black;
     padding: 5px 10px;
@@ -52,6 +52,10 @@ li:hover {
     transform: scale(1.05);
 }
 
+#RestoreButton:hover {
+    transform: scale(1.05);
+}
+
 #AddButton:active {
     transform: scale(0.95);
 }
@@ -63,6 +67,11 @@ li:hover {
 #ThemeButton:active {
     transform: scale(0.95);
 }
+
+#RestoreButton:active {
+    transform: scale(0.95);
+}
+
 #TaskName, #TaskDesc {
     background-color: white; /* Adjust as needed */
     color: black;

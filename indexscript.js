@@ -3,7 +3,10 @@ const InputForm = document.getElementById("InputForm");
 const TaskName = document.getElementById("TaskName");
 const TaskDesc = document.getElementById("TaskDesc");
 const ClearButton = document.getElementById("ClearButton");
+const ThemeButton = document.getElementById("ThemeButton");
+const WebHead = document.getElementById("WebHead");
 
+let ActiveTasks = [];
 InputForm.addEventListener('submit', function(){
     event.preventDefault();
     console.log("We're being called");
@@ -16,6 +19,8 @@ InputForm.addEventListener('submit', function(){
         let newTaskDesc = TaskDesc.value;
         newTaskItem.innerHTML = "<b>" + newTaskName + "</b><br><i>" + newTaskDesc + "</i>";
         TaskList.append(newTaskItem);
+        ActiveTasks.push(newTaskItem);
+        console.log("Pushed");
     }
 });
 
@@ -23,6 +28,19 @@ ClearButton.addEventListener('click', function(){
     while (TaskList.firstChild){
         TaskList.removeChild(TaskList.firstChild);
     }
+    ActiveTasks.removeAll();
+});
+
+ThemeButton.addEventListener('click', function(){
+    document.body.style.backgroundColor = "#121212";
+    WebHead.style.color = "white";
+    for (let i = 0; i < ActiveTasks.length; i++) {
+        let tempTask = ActiveTasks[i];
+        tempTask.style.backgroundColor = "grey";
+        tempTask.style.color = "white";
+        console.log("Morgan");
+    }
+    console.log("Your wish.")
 });
 
 // add localstorage functionality

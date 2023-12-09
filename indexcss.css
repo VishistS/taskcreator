@@ -1,0 +1,83 @@
+body {
+    font-family: monospace;
+    text-align: center;
+    margin: auto;
+    background-color: antiquewhite;
+}
+
+#TaskList {
+    padding: 0;
+    margin: 0;
+}
+#TaskList > li{
+    margin: auto;
+    list-style-type: none;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); /* Adjust as needed */
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: white;
+    width: 60%;
+    border-radius: 10px;
+    min-height: 20px;
+    word-wrap: break-word;
+}
+
+li:hover {
+  background-color: #e0e0e0; /* Adjust as needed */
+  transform: scale(1.05); /* Adjust as needed */
+}
+
+#AddButton, #ClearButton, #ThemeButton {
+    background-color: white; /* Green color, adjust as needed */
+    color: black;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: monospace;
+    border: none;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1); /* Adjust as needed */
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#AddButton:hover {
+    transform: scale(1.05);
+}
+
+#ClearButton:hover {
+    transform: scale(1.05);
+}
+
+#ThemeButton:hover {
+    transform: scale(1.05);
+}
+
+#AddButton:active {
+    transform: scale(0.95);
+}
+
+#ClearButton:active {
+    transform: scale(0.95);
+}
+
+#ThemeButton:active {
+    transform: scale(0.95);
+}
+#TaskName, #TaskDesc {
+    background-color: white; /* Adjust as needed */
+    color: black;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: monospace;
+    border: none;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1); /* Adjust as needed */
+    border-radius: 4px;
+    outline: none; /* Remove the default input focus border */
+    width: 20%;
+}
+
+#TaskName:focus {
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); /* Adjust as needed for focus state */
+}
+#TaskDesc:focus {
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); /* Adjust as needed for focus state */
+}

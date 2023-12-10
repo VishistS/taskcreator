@@ -5,15 +5,41 @@ const TaskDesc = document.getElementById("TaskDesc");
 const ClearButton = document.getElementById("ClearButton");
 const ThemeButton = document.getElementById("ThemeButton");
 const RestoreButton = document.getElementById("RestoreButton");
+const TaskDate = document.getElementById("DateButton");
 const WebHead = document.getElementById("WebHead");
 
 let ActiveTasks = [];
 let DarkMode = false;
 
-function Task(taskn, taskd) {
+function Task(taskn, taskd, date) {
     this.taskname = taskn;
     this.taskdesc = taskd;
+    this.taskdate = date;
 }
+
+function RestoreTaskInit() {
+    let listitems = JSON.parse(localStorage.getItem("StoreArray"));
+    console.log(listitems);
+    while (TaskList.firstChild){
+        TaskList.removeChild(TaskList.firstChild);
+    }
+    for (let i = 0; i < listitems.length; i++) {
+        let tempName = listitems[i].taskname;
+        let tempDesc = listitems[i].taskdesc;
+        let tempDate = listitems[i].taskdate;
+        let newTaskItem = document.createElement('li');
+        if (tempDate) {
+            newTaskItem.innerHTML = "<b>" + tempName + "</b><br><i>" + tempDesc + "</i>" + "<br><i> Due Date : " + tempDate + "</i>";
+        }
+        else {
+            newTaskItem.innerHTML = "<b>" + tempName + "</b><br><i>" + tempDesc + "</i>";
+        }
+        TaskList.append(newTaskItem);
+    }
+    console.log("Restored");
+}
+
+RestoreTaskInit();
 
 InputForm.addEventListener('submit', function(){
     event.preventDefault();
@@ -23,8 +49,13 @@ InputForm.addEventListener('submit', function(){
    }
     else {
         let newTaskItem = document.createElement('li');
-        let taskObj = new Task(TaskName.value, TaskDesc.value)
-        newTaskItem.innerHTML = "<b>" + taskObj.taskname + "</b><br><i>" + taskObj.taskdesc + "</i>";
+        let taskObj = new Task(TaskName.value, TaskDesc.value, TaskDate.value);
+        if (taskObj.taskdate) {
+            newTaskItem.innerHTML = "<b>" + taskObj.taskname + "</b><br><i>" + taskObj.taskdesc + "</i>" + "<br><i> Due Date : " + taskObj.taskdate + "</i>";
+        }
+        else {
+            newTaskItem.innerHTML = "<b>" + taskObj.taskname + "</b><br><i>" + taskObj.taskdesc + "</i>";
+        }
         TaskList.append(newTaskItem);
         ActiveTasks.push(taskObj);
         localStorage.setItem("StoreArray", JSON.stringify(ActiveTasks));
@@ -59,20 +90,6 @@ ThemeButton.addEventListener('click', function(){
     }
 });
 
-RestoreButton.addEventListener('click', function(){
-    let listitems = JSON.parse(localStorage.getItem("StoreArray"));
-    console.log(listitems);
-    while (TaskList.firstChild){
-        TaskList.removeChild(TaskList.firstChild);
-    }
-    for (let i = 0; i < listitems.length; i++) {
-        let tempName = listitems[i].taskname;
-        let tempDesc = listitems[i].taskdesc;
-        let newTaskItem = document.createElement('li');
 
-        newTaskItem.innerHTML = "<b>" + tempName + "</b><br><i>" + tempDesc + "</i>";
-        TaskList.append(newTaskItem);
-    }
-});
 
 // add localstorage functionality

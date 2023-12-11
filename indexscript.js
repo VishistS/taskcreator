@@ -7,7 +7,8 @@ const ThemeButton = document.getElementById("ThemeButton");
 const RestoreButton = document.getElementById("RestoreButton");
 const TaskDate = document.getElementById("DateButton");
 const WebHead = document.getElementById("WebHead");
-
+const FootNote = document.getElementById("FootNote");
+const OptionDisclaim = document.getElementById("InfoDisclaim");
 let ActiveTasks = [];
 let DarkMode = false;
 
@@ -23,20 +24,25 @@ function RestoreTaskInit() {
     while (TaskList.firstChild){
         TaskList.removeChild(TaskList.firstChild);
     }
-    for (let i = 0; i < listitems.length; i++) {
-        let tempName = listitems[i].taskname;
-        let tempDesc = listitems[i].taskdesc;
-        let tempDate = listitems[i].taskdate;
-        let newTaskItem = document.createElement('li');
-        if (tempDate) {
-            newTaskItem.innerHTML = "<b>" + tempName + "</b><br><i>" + tempDesc + "</i>" + "<br><i> Due Date : " + tempDate + "</i>";
+    if (listitems) {
+        for (let i = 0; i < listitems.length; i++) {
+            let tempName = listitems[i].taskname;
+            let tempDesc = listitems[i].taskdesc;
+            let tempDate = listitems[i].taskdate;
+            let newTaskItem = document.createElement('li');
+            if (tempDate) {
+                newTaskItem.innerHTML = "<b>" + tempName + "</b><br><i>" + tempDesc + "</i>" + "<br><i> Due Date : " + tempDate + "</i>";
+            }
+            else {
+                newTaskItem.innerHTML = "<b>" + tempName + "</b><br><i>" + tempDesc + "</i>";
+            }
+            TaskList.append(newTaskItem);
         }
-        else {
-            newTaskItem.innerHTML = "<b>" + tempName + "</b><br><i>" + tempDesc + "</i>";
-        }
-        TaskList.append(newTaskItem);
+        console.log("Restored");
     }
-    console.log("Restored");
+    else {
+        console.log("Blank slate.")
+    }
 }
 
 RestoreTaskInit();
@@ -74,11 +80,13 @@ ClearButton.addEventListener('click', function(){
 ThemeButton.addEventListener('click', function(){
     if (DarkMode === false) {
         DarkMode = true;
-        document.body.style.backgroundColor = "#121212";
+        document.body.style.backgroundColor = "gray";
         WebHead.style.color = "white";
         // will need to reimplement adjustment of theme for individual list items later on
         // use loop ^^
         ThemeButton.value = "Light Mode";
+        FootNote.style.color = "white";
+        OptionDisclaim.style.color = "white";
     }
     else if (DarkMode === true) {
         DarkMode = false;
@@ -87,6 +95,8 @@ ThemeButton.addEventListener('click', function(){
         // use loop ^^
         WebHead.style.color = "black";
         ThemeButton.value = "Dark Mode";
+        FootNote.style.color = "black";
+        OptionDisclaim.style.color = "black";
     }
 });
 

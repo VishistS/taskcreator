@@ -5,7 +5,9 @@
         <link rel = "stylesheet" href = "indexcss.css">
         <meta property="description" content="A lightweight, user friendly website that lets you track your tasks at no cost!"/>
         <meta property="og:url" content="VS Task Tracker">
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class = "Heading">
@@ -20,7 +22,7 @@
             <input type = "text" placeholder = "Enter the task name" id = "TaskName">
             <input type = "button" value = "Clear" id = "ClearButton">
             <br>
-            <p><b>Optional Information</b></p>
+            <p id = "InfoDisclaim"><b>Optional Information</b></p>
             <input type = "text" placeholder = "Enter the task description" id = "TaskDesc">
             <input type = "date" placeholder = "Enter task date" id = "DateButton">
             </form>
@@ -31,7 +33,7 @@
             </ul>
         </div>
         <br>
-        <p><i><b>Disclaimer : </b>This project is still in development, if you notice any bugs - please <a href = "mailto:vishistsantanam@gmail.com">contact me.</a></i></p>
+        <p id = "FootNote"><i><b>Disclaimer : </b>This project is still in development, if you notice any bugs - please <a href = "mailto:vishistsantanam@gmail.com">contact me.</a></i></p>
         <script type = "text/javascript" src = "indexscript.js"></script>
 
     </body>

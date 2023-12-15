@@ -12,6 +12,8 @@ const OptionDisclaim = document.getElementById("InfoDisclaim");
 let ActiveTasks = [];
 let DarkMode = false;
 
+// final vers -- delete functionality scuffed b/c same task name remove all -- fix later
+
 function Task(taskn, taskd, date) {
     this.taskname = taskn;
     this.taskdesc = taskd;
@@ -32,14 +34,49 @@ function RestoreTaskInit() {
             let newTaskItem = document.createElement('li');
             if (tempDate) {
                 newTaskItem.innerHTML = "<b>" + tempName + "</b><br><i>" + tempDesc + "</i>" + "<br><i> Due Date : " + tempDate + "</i>";
+                let tempDelete = document.createElement('button');
+                tempDelete.textContent = "Delete";
+                tempDelete.addEventListener('click', function(){
+                    newTaskItem.remove();
+                    for (let i = 0; i < ActiveTasks.length; i++) {
+                        let currLoopObj = ActiveTasks[i];
+                        console.log("Looped");
+                        if (currLoopObj.taskname === taskObj.taskname) {
+                            ActiveTasks.splice(i, i+1);
+                            console.log("Called");
+                            console.log(ActiveTasks);
+                        }
+                    }
+                    localStorage.setItem("StoreArray", JSON.stringify(ActiveTasks));
+                    console.log("Set Storage");
+                });
+                newTaskItem.appendChild(tempDelete);
             }
             else {
                 newTaskItem.innerHTML = "<b>" + tempName + "</b><br><i>" + tempDesc + "</i>";
+                let tempDelete = document.createElement('button');
+                tempDelete.textContent = "Delete";
+                tempDelete.addEventListener('click', function(){
+                    newTaskItem.remove();
+                    for (let i = 0; i < ActiveTasks.length; i++) {
+                        let currLoopObj = ActiveTasks[i];
+                        console.log("Looped");
+                        if (currLoopObj.taskname === taskObj.taskname) {
+                            ActiveTasks.splice(i, i+1);
+                            console.log("Called");
+                            console.log(ActiveTasks);
+                        }
+                    }
+                    localStorage.setItem("StoreArray", JSON.stringify(ActiveTasks));
+                    console.log("Set Storage");
+                });
+                newTaskItem.appendChild(tempDelete);
             }
             TaskList.append(newTaskItem);
         }
         console.log("Restored");
     }
+
     else {
         console.log("Blank slate.")
     }
@@ -56,12 +93,32 @@ InputForm.addEventListener('submit', function(){
     else {
         let newTaskItem = document.createElement('li');
         let taskObj = new Task(TaskName.value, TaskDesc.value, TaskDate.value);
+        let tempDelete = document.createElement('button');
+        tempDelete.textContent = "Delete";
         if (taskObj.taskdate) {
-            newTaskItem.innerHTML = "<b>" + taskObj.taskname + "</b><br><i>" + taskObj.taskdesc + "</i>" + "<br><i> Due Date : " + taskObj.taskdate + "</i>";
+            newTaskItem.innerHTML = "<b>" + taskObj.taskname + "</b><br><i>" + taskObj.taskdesc + "</i>" + "<br><i> Due Date : " + taskObj.taskdate + "</i>" + "<br>";
         }
         else {
-            newTaskItem.innerHTML = "<b>" + taskObj.taskname + "</b><br><i>" + taskObj.taskdesc + "</i>";
+            newTaskItem.innerHTML = "<b>" + taskObj.taskname + "</b><br><i>" + taskObj.taskdesc + "</i>" + "<br>";
         }
+
+        tempDelete.addEventListener('click', function(){
+           newTaskItem.remove();
+            for (let i = 0; i < ActiveTasks.length; i++) {
+                let currLoopObj = ActiveTasks[i];
+                console.log("Looped");
+                if (currLoopObj.taskname === taskObj.taskname) {
+                    ActiveTasks.splice(i, i+1);
+                    console.log("Called");
+                    console.log(ActiveTasks);
+                }
+            }
+            localStorage.setItem("StoreArray", JSON.stringify(ActiveTasks));
+            console.log("Set Storage");
+        });
+
+         // finish code to update active tasks after removal
+        newTaskItem.appendChild(tempDelete);
         TaskList.append(newTaskItem);
         ActiveTasks.push(taskObj);
         localStorage.setItem("StoreArray", JSON.stringify(ActiveTasks));
@@ -99,7 +156,5 @@ ThemeButton.addEventListener('click', function(){
         OptionDisclaim.style.color = "black";
     }
 });
-
-
 
 // add localstorage functionality

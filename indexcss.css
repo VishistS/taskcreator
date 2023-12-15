@@ -47,6 +47,18 @@ li:hover {
     cursor: pointer;
 }
 
+button {
+    background-color: white; /* Green color, adjust as needed */
+    color: black;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: 'Rethink Sans', sans-serif;
+    border: 2px solid black;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1); /* Adjust as needed */
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 #AddButton:hover {
     transform: scale(1.05);
 }
@@ -59,6 +71,9 @@ li:hover {
     transform: scale(1.05);
 }
 
+button:hover {
+    transform: scale(1.05);
+}
 
 #AddButton:active {
     transform: scale(0.95);
@@ -72,6 +87,9 @@ li:hover {
     transform: scale(0.95);
 }
 
+button:active {
+    transform: scale(0.95);
+}
 
 #TaskName, #TaskDesc {
     background-color: white; /* Adjust as needed */
